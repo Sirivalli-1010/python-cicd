@@ -1,3 +1,4 @@
+```groovy
 pipeline {
     agent any
 
@@ -12,25 +13,26 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                bat 'python -m pip install -r requirements.txt'
+                bat '"C:/Users/Siri/AppData/Local/Programs/Python/Python310/python.exe" -m pip install -r requirements.txt'
             }
         }
 
         stage('Compile') {
             steps {
-                bat 'python -m compileall -q app.py test_app.py'
+                bat '"C:/Users/Siri/AppData/Local/Programs/Python/Python310/python.exe" -m compileall -q app.py test_app.py'
             }
         }
 
         stage('Test') {
             steps {
-                bat 'python -m pytest -v'
+                bat '"C:/Users/Siri/AppData/Local/Programs/Python/Python310/python.exe" -m pytest -v'
             }
         }
 
         stage('Package') {
             steps {
-                bat 'python -c "import zipfile; z=zipfile.ZipFile(\'python-app.zip\', \'w\', zipfile.ZIP_DEFLATED); z.write(\'app.py\'); z.close()"'
+                bat '"C:/Users/Siri/AppData/Local/Programs/Python/Python310/python.exe" -c "import zipfile; z=zipfile.ZipFile(\'python-app.zip\', \'w\', zipfile.ZIP_DEFLATED); z.write(\'app.py\'); z.close()"'
+
                 archiveArtifacts artifacts: 'python-app.zip',
                                  fingerprint: true
             }
@@ -47,3 +49,4 @@ pipeline {
         }
     }
 }
+```
